@@ -49,24 +49,26 @@ st.markdown("""
     .main-title {
         font-size: 2rem;
         font-weight: 800;
-        color: #2D2D6B;
+        color: #00E5FF;
         text-align: center;
         margin-bottom: 0.2rem;
         line-height: 1.3;
         white-space: normal;
         word-wrap: break-word;
+        text-shadow: 0 0 20px rgba(0,229,255,0.5);
     }
     .sub-title {
         font-size: 1rem;
-        color: #7B2FBE;
+        color: #E040FB;
         text-align: center;
         margin-bottom: 1.2rem;
+        font-weight: 600;
     }
     .section-title {
         font-size: 1.15rem;
         font-weight: 700;
-        color: #2D2D6B;
-        border-left: 5px solid #7B2FBE;
+        color: #00E5FF;
+        border-left: 5px solid #E040FB;
         padding-left: 0.6rem;
         margin: 1rem 0 0.8rem 0;
         white-space: normal;
@@ -74,72 +76,83 @@ st.markdown("""
         line-height: 1.4;
     }
     div[data-testid="metric-container"] {
-        background-color: #FDF2FF;
-        border: 1px solid #D8B4FE;
-        border-radius: 10px;
+        background: linear-gradient(135deg, #1A0533, #0D1B40);
+        border: 1px solid #E040FB;
+        border-radius: 12px;
         padding: 0.7rem 0.8rem;
+        box-shadow: 0 0 12px rgba(224,64,251,0.25);
     }
     div[data-testid="metric-container"] label {
-        color: #5B21B6 !important;
-        font-weight: 600 !important;
+        color: #B0BEC5 !important;
+        font-weight: 700 !important;
         font-size: 0.75rem !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.6px !important;
         white-space: normal !important;
         overflow: visible !important;
         text-overflow: unset !important;
         word-break: break-word;
     }
     div[data-testid="stMetricValue"] {
-        color: #2D2D6B !important;
-        font-size: 1.25rem !important;
+        color: #00E5FF !important;
+        font-size: 1.35rem !important;
         font-weight: 800 !important;
         white-space: normal !important;
         overflow: visible !important;
         text-overflow: unset !important;
         word-break: break-word;
+        text-shadow: 0 0 10px rgba(0,229,255,0.4);
     }
     div[data-testid="stMetricDelta"] {
-        color: #7B2FBE !important;
+        color: #69FF47 !important;
         font-size: 0.8rem !important;
+        font-weight: 600 !important;
     }
     div[data-testid="stSidebar"] {
-        background-color: #1A1A2E;
+        background: linear-gradient(180deg, #0A0015 0%, #0D0020 100%);
+        border-right: 2px solid #E040FB;
     }
     div[data-testid="stSidebar"] * {
-        color: #DDD6FE !important;
+        color: #CFD8DC !important;
     }
     div[data-testid="stSidebar"] strong {
-        color: #FFFFFF !important;
+        color: #E040FB !important;
+        font-weight: 700 !important;
     }
     .stButton > button[kind="primary"] {
-        background: linear-gradient(135deg, #2D2D6B, #7B2FBE) !important;
-        color: #FFFFFF !important;
+        background: linear-gradient(135deg, #E040FB, #00E5FF) !important;
+        color: #000000 !important;
         border: none !important;
-        font-weight: 700 !important;
+        font-weight: 800 !important;
         font-size: 1rem !important;
         border-radius: 10px !important;
         padding: 0.6rem 1rem !important;
+        box-shadow: 0 0 18px rgba(224,64,251,0.5) !important;
     }
     .stButton > button[kind="primary"]:hover {
-        background: linear-gradient(135deg, #7B2FBE, #E74C8B) !important;
+        background: linear-gradient(135deg, #00E5FF, #69FF47) !important;
+        box-shadow: 0 0 28px rgba(0,229,255,0.6) !important;
     }
     .stSelectbox label,
     .stSlider label,
     .stMultiSelect label {
-        color: #2D2D6B !important;
-        font-weight: 600 !important;
+        color: #00E5FF !important;
+        font-weight: 700 !important;
         font-size: 0.88rem !important;
     }
     div[data-testid="stCaptionContainer"] p {
-        color: #6B21A8 !important;
+        color: #78909C !important;
         font-size: 0.78rem !important;
         font-style: italic;
+        border-left: 2px solid #E040FB;
+        padding-left: 0.5rem;
     }
     .stAlert p, .stAlert li {
-        color: #1E1B4B !important;
+        color: #E0F7FA !important;
         font-size: 0.87rem !important;
     }
     details summary p {
-        color: #2D2D6B !important;
+        color: #00E5FF !important;
         font-weight: 600 !important;
         font-size: 0.9rem !important;
     }
@@ -611,16 +624,18 @@ def graphique_residus(y_test, y_pred):
 
 def graphique_cv_scores(cv_scores):
     """Graphique des scores de validation croisée temporelle."""
-    fig, ax = plt.subplots(figsize=(8, 4))
+    fig, ax = plt.subplots(figsize=(8, 5))
     folds = [f"Fold {i+1}" for i in range(len(cv_scores))]
     couleurs = ["#E74C8B" if v == max(cv_scores) else "#7B2FBE" for v in cv_scores]
     barres = ax.bar(folds, cv_scores, color=couleurs, edgecolor="#2D2D6B", alpha=0.85)
+    ymax = max(cv_scores)
+    ax.set_ylim(0, ymax * 1.35)
     for b, v in zip(barres, cv_scores):
-        ax.text(b.get_x() + b.get_width()/2, b.get_height() + 0.02,
-                f"{v:.3f}%", ha="center", fontsize=10, fontweight="bold", color="#1E1B4B")
+        ax.text(b.get_x() + b.get_width()/2, b.get_height() + ymax * 0.02,
+                f"{v:.3f}%", ha="center", va="bottom", fontsize=10, fontweight="bold", color="#1E1B4B")
     ax.axhline(np.mean(cv_scores), color="#F4C542", linestyle="--", linewidth=2,
                label=f"Moyenne : {np.mean(cv_scores):.3f}%")
-    ax.set_title("MAE par Fold — TimeSeriesSplit (5 folds)", fontsize=12, fontweight="bold", color="#2D2D6B")
+    ax.set_title("MAE par Fold — TimeSeriesSplit (5 folds)", fontsize=12, fontweight="bold", color="#2D2D6B", pad=15)
     ax.set_ylabel("MAE (%)", color="#2D2D6B"); ax.legend(); ax.grid(axis="y", alpha=0.3)
     plt.tight_layout()
     return fig
@@ -647,7 +662,7 @@ def main():
         )
         st.markdown("---")
         st.markdown("**📦 Dataset**")
-        st.markdown("📌 Source : ILOSTAT / OIT")
+        st.markdown("📌 Source : Kaggle")
         st.markdown("📌 183 pays | 1991–2025")
         st.markdown("📌 57 519 lignes")
         st.markdown("---")
@@ -1129,10 +1144,10 @@ modele.fit(X_train, y_train, eval_set=[(X_test, y_test)], verbose=False)
 
             else:
                 st.markdown("""
-                <div style="background: #FDF2FF; border-radius: 12px; padding: 2rem;
-                            text-align: center; border: 2px dashed #7B2FBE;">
+                <div style="background: linear-gradient(135deg, #1A0533, #0D1B40); border-radius: 12px; padding: 2rem;
+                            text-align: center; border: 2px dashed #E040FB;">
                     <div style="font-size: 2.5rem;">⚡</div>
-                    <div style="color: #2D2D6B; font-weight: 600; margin-top: 0.8rem; font-size: 0.95rem;">
+                    <div style="color: #00E5FF; font-weight: 600; margin-top: 0.8rem; font-size: 0.95rem;">
                         Remplissez le formulaire et cliquez<br>sur <strong>Prédire avec XGBoost</strong>
                     </div>
                 </div>
