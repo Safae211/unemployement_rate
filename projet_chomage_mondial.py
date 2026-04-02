@@ -47,114 +47,51 @@ st.set_page_config(
 st.markdown("""
 <style>
     .main-title {
-        font-size: 2rem;
-        font-weight: 800;
-        color: #00E5FF;
-        text-align: center;
-        margin-bottom: 0.2rem;
-        line-height: 1.3;
-        white-space: normal;
-        word-wrap: break-word;
-        text-shadow: 0 0 20px rgba(0,229,255,0.5);
+        font-size: 2rem; font-weight: 800; color: #00E5FF;
+        text-align: center; margin-bottom: 0.2rem;
+        line-height: 1.3; text-shadow: 0 0 20px rgba(0,229,255,0.5);
     }
     .sub-title {
-        font-size: 1rem;
-        color: #E040FB;
-        text-align: center;
-        margin-bottom: 1.2rem;
-        font-weight: 600;
+        font-size: 1rem; color: #E040FB;
+        text-align: center; margin-bottom: 1.2rem; font-weight: 600;
     }
     .section-title {
-        font-size: 1.15rem;
-        font-weight: 700;
-        color: #00E5FF;
+        font-size: 1.15rem; font-weight: 700; color: #00E5FF;
         border-left: 5px solid #E040FB;
-        padding-left: 0.6rem;
-        margin: 1rem 0 0.8rem 0;
-        white-space: normal;
-        word-wrap: break-word;
-        line-height: 1.4;
+        padding-left: 0.6rem; margin: 1rem 0 0.8rem 0;
     }
     div[data-testid="metric-container"] {
         background: linear-gradient(135deg, #1A0533, #0D1B40);
-        border: 1px solid #E040FB;
-        border-radius: 12px;
-        padding: 0.7rem 0.8rem;
-        box-shadow: 0 0 12px rgba(224,64,251,0.25);
+        border: 1px solid #E040FB; border-radius: 12px;
+        padding: 0.7rem 0.8rem; box-shadow: 0 0 12px rgba(224,64,251,0.25);
     }
     div[data-testid="metric-container"] label {
-        color: #B0BEC5 !important;
-        font-weight: 700 !important;
-        font-size: 0.75rem !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.6px !important;
-        white-space: normal !important;
-        overflow: visible !important;
-        text-overflow: unset !important;
-        word-break: break-word;
+        color: #B0BEC5 !important; font-weight: 700 !important;
+        font-size: 0.75rem !important; text-transform: uppercase !important;
     }
     div[data-testid="stMetricValue"] {
-        color: #00E5FF !important;
-        font-size: 1.35rem !important;
-        font-weight: 800 !important;
-        white-space: normal !important;
-        overflow: visible !important;
-        text-overflow: unset !important;
-        word-break: break-word;
-        text-shadow: 0 0 10px rgba(0,229,255,0.4);
-    }
-    div[data-testid="stMetricDelta"] {
-        color: #69FF47 !important;
-        font-size: 0.8rem !important;
-        font-weight: 600 !important;
+        color: #00E5FF !important; font-size: 1.35rem !important;
+        font-weight: 800 !important; text-shadow: 0 0 10px rgba(0,229,255,0.4);
     }
     div[data-testid="stSidebar"] {
         background: linear-gradient(180deg, #0A0015 0%, #0D0020 100%);
         border-right: 2px solid #E040FB;
     }
-    div[data-testid="stSidebar"] * {
-        color: #CFD8DC !important;
-    }
-    div[data-testid="stSidebar"] strong {
-        color: #E040FB !important;
-        font-weight: 700 !important;
-    }
+    div[data-testid="stSidebar"] * { color: #CFD8DC !important; }
+    div[data-testid="stSidebar"] strong { color: #E040FB !important; font-weight: 700 !important; }
     .stButton > button[kind="primary"] {
         background: linear-gradient(135deg, #E040FB, #00E5FF) !important;
-        color: #000000 !important;
-        border: none !important;
-        font-weight: 800 !important;
-        font-size: 1rem !important;
+        color: #000000 !important; border: none !important;
+        font-weight: 800 !important; font-size: 1rem !important;
         border-radius: 10px !important;
-        padding: 0.6rem 1rem !important;
         box-shadow: 0 0 18px rgba(224,64,251,0.5) !important;
     }
-    .stButton > button[kind="primary"]:hover {
-        background: linear-gradient(135deg, #00E5FF, #69FF47) !important;
-        box-shadow: 0 0 28px rgba(0,229,255,0.6) !important;
-    }
-    .stSelectbox label,
-    .stSlider label,
-    .stMultiSelect label {
-        color: #00E5FF !important;
-        font-weight: 700 !important;
-        font-size: 0.88rem !important;
+    .stSelectbox label, .stSlider label, .stMultiSelect label {
+        color: #00E5FF !important; font-weight: 700 !important;
     }
     div[data-testid="stCaptionContainer"] p {
-        color: #78909C !important;
-        font-size: 0.78rem !important;
-        font-style: italic;
-        border-left: 2px solid #E040FB;
-        padding-left: 0.5rem;
-    }
-    .stAlert p, .stAlert li {
-        color: #E0F7FA !important;
-        font-size: 0.87rem !important;
-    }
-    details summary p {
-        color: #00E5FF !important;
-        font-weight: 600 !important;
-        font-size: 0.9rem !important;
+        color: #78909C !important; font-style: italic;
+        border-left: 2px solid #E040FB; padding-left: 0.5rem;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -192,7 +129,7 @@ def charger_donnees():
         how="left"
     )
 
-    # Combler les taux_emploi manquants par la médiane du pays/genre/age
+    # Combler taux_emploi manquants
     df["taux_emploi"] = df.groupby(["country", "sex", "age"])["taux_emploi"].transform(
         lambda x: x.fillna(x.median())
     )
@@ -202,7 +139,6 @@ def charger_donnees():
     df["post_2008"]  = ((df["year"] >= 2008) & (df["year"] <= 2013)).astype(int)
     df["decennie"]   = (df["year"] // 10) * 10
 
-    # ── FIX : encodeurs cohérents — on les crée une seule fois sur tout le df
     le_sex     = LabelEncoder().fit(df["sex"])
     le_age     = LabelEncoder().fit(df["age"])
     le_country = LabelEncoder().fit(df["country"])
@@ -212,40 +148,43 @@ def charger_donnees():
     df["country_encoded"] = le_country.transform(df["country"])
 
     df = _ajouter_lag_features(df)
-
     return df
 
 
 def _ajouter_lag_features(df):
     """
-    Ajoute 6 features temporelles par groupe (country, sex, age) :
-      - chomage_lag1     : valeur de l'année N-1
-      - chomage_lag2     : valeur de l'année N-2
-      - chomage_rolling3 : moyenne glissante sur 3 ans
-      - chomage_rolling5 : moyenne glissante sur 5 ans
-      - chomage_delta    : différence N vs N-1 (tendance)
-      - chomage_delta2   : accélération (dérivée seconde)
-    Les lignes sans lag (première année de chaque groupe) sont supprimées.
+    ✅ FIX 0 NaN :
+    - min_periods=1 sur tous les rolling → jamais de NaN
+    - fillna(0) sur delta et delta2 → jamais de NaN
+    - fillna(lag1) sur lag2 → jamais de NaN
+    - dropna uniquement sur lag1 (première année de chaque groupe)
     """
     df = df.sort_values(["country", "sex", "age", "year"]).copy()
     grp = df.groupby(["country", "sex", "age"])["taux_chomage"]
 
+    # Lag 1 et 2
     df["chomage_lag1"] = grp.shift(1)
     df["chomage_lag2"] = grp.shift(2)
 
+    # Rolling avec min_periods=1 → JAMAIS de NaN
     df["chomage_rolling3"] = grp.transform(
         lambda x: x.shift(1).rolling(3, min_periods=1).mean()
     )
     df["chomage_rolling5"] = grp.transform(
-        lambda x: x.shift(1).rolling(5, min_periods=2).mean()
+        lambda x: x.shift(1).rolling(5, min_periods=1).mean()   # ✅ min_periods=1
     )
 
-    df["chomage_delta"]  = grp.diff()
-    df["chomage_delta2"] = grp.diff().diff()
+    # Delta avec fillna(0) → JAMAIS de NaN
+    df["chomage_delta"]  = grp.diff().fillna(0)        # ✅ fillna(0)
+    df["chomage_delta2"] = grp.diff().diff().fillna(0) # ✅ fillna(0)
 
+    # Supprimer seulement la 1ère année de chaque groupe (lag1 forcément NaN)
     df.dropna(subset=["chomage_lag1"], inplace=True)
-    df.reset_index(drop=True, inplace=True)
 
+    # Combler lag2 NaN par lag1 (2ème année du groupe)
+    df["chomage_lag2"] = df["chomage_lag2"].fillna(df["chomage_lag1"])  # ✅
+
+    df.reset_index(drop=True, inplace=True)
     return df
 
 
@@ -255,27 +194,21 @@ def _ajouter_lag_features(df):
 
 @st.cache_resource
 def entrainer_modele(df):
-    """
-    FIX 1 : Split temporel (pas aléatoire) pour éviter le data leakage.
-    FIX 2 : Les encodeurs sont sauvegardés et retournés pour la prédiction.
-    FIX 3 : Meilleurs hyperparamètres + early stopping.
-    """
     df_model = df.copy()
     df_model.drop(columns=["iso_code", "country", "sex", "age"], inplace=True)
     df_model.dropna(inplace=True)
+    df_model.reset_index(drop=True, inplace=True)
 
-    # ── FIX 1 : tri par année puis split temporel ────────────────────────────
+    # Split temporel (pas aléatoire → pas de data leakage)
     df_model = df_model.sort_values("year").reset_index(drop=True)
     split_idx = int(len(df_model) * 0.8)
     train_df  = df_model.iloc[:split_idx]
     test_df   = df_model.iloc[split_idx:]
 
     feature_cols = [c for c in df_model.columns if c != "taux_chomage"]
-
     X_train, y_train = train_df[feature_cols], train_df["taux_chomage"]
     X_test,  y_test  = test_df[feature_cols],  test_df["taux_chomage"]
 
-    # ── FIX 3 : hyperparamètres améliorés + early stopping ──────────────────
     modele = XGBRegressor(
         n_estimators=500,
         max_depth=5,
@@ -291,22 +224,16 @@ def entrainer_modele(df):
         random_state=42,
         n_jobs=-1
     )
-    modele.fit(
-        X_train, y_train,
-        eval_set=[(X_test, y_test)],
-        verbose=False
-    )
+    modele.fit(X_train, y_train, eval_set=[(X_test, y_test)], verbose=False)
 
     y_pred = modele.predict(X_test)
     mae    = mean_absolute_error(y_test, y_pred)
     r2     = r2_score(y_test, y_pred)
 
     importances = pd.Series(
-        modele.feature_importances_,
-        index=feature_cols
+        modele.feature_importances_, index=feature_cols
     ).sort_values(ascending=False)
 
-    # ── FIX 2 : encodeurs cohérents sauvegardés ──────────────────────────────
     le_sex     = LabelEncoder().fit(df["sex"])
     le_age     = LabelEncoder().fit(df["age"])
     le_country = LabelEncoder().fit(df["country"])
@@ -321,9 +248,6 @@ def entrainer_modele(df):
 def _build_feature_row(annee, taux_emploi, sex_enc, age_enc, country_enc,
                         lag1, rolling3, delta, feature_cols,
                         lag2=None, rolling5=None, delta2=None):
-    """
-    FIX : factorisation — plus aucune duplication du dictionnaire de features.
-    """
     row = {
         "year":             annee,
         "taux_emploi":      taux_emploi,
@@ -334,11 +258,11 @@ def _build_feature_row(annee, taux_emploi, sex_enc, age_enc, country_enc,
         "age_encoded":      age_enc,
         "country_encoded":  country_enc,
         "chomage_lag1":     lag1,
-        "chomage_lag2":     lag2  if lag2     is not None else lag1,
+        "chomage_lag2":     lag2     if lag2     is not None else lag1,
         "chomage_rolling3": rolling3,
         "chomage_rolling5": rolling5 if rolling5 is not None else rolling3,
         "chomage_delta":    delta,
-        "chomage_delta2":   delta2 if delta2  is not None else 0.0,
+        "chomage_delta2":   delta2   if delta2   is not None else 0.0,
     }
     return pd.DataFrame([[row.get(c, 0) for c in feature_cols]], columns=feature_cols)
 
@@ -351,31 +275,25 @@ def graphique_distribution(df):
     data = df[df["sex"] == "Total"]["taux_chomage"]
     fig, ax = plt.subplots(figsize=(10, 4))
     sns.histplot(data, kde=True, color="#7B2FBE", edgecolor="black", alpha=0.7, bins=40, ax=ax)
-    ax.axvline(data.mean(), color="#2D2D6B", linestyle="--", linewidth=2,
-               label=f"Moyenne : {data.mean():.2f}%")
-    ax.axvline(data.median(), color="#E74C8B", linestyle="--", linewidth=2,
-               label=f"Médiane : {data.median():.2f}%")
+    ax.axvline(data.mean(),   color="#2D2D6B", linestyle="--", linewidth=2, label=f"Moyenne : {data.mean():.2f}%")
+    ax.axvline(data.median(), color="#E74C8B", linestyle="--", linewidth=2, label=f"Médiane : {data.median():.2f}%")
     ax.set_title("Distribution du Taux de Chômage Mondial", fontsize=14, fontweight="bold", color="#2D2D6B")
-    ax.set_xlabel("Taux de chômage (%)", color="#2D2D6B")
-    ax.set_ylabel("Fréquence", color="#2D2D6B")
+    ax.set_xlabel("Taux de chômage (%)"); ax.set_ylabel("Fréquence")
     ax.legend(); ax.grid(axis="y", alpha=0.3)
-    plt.tight_layout()
-    return fig
+    plt.tight_layout(); return fig
 
 
 def graphique_evolution(df):
     chomage_annuel = df[df["sex"] == "Total"].groupby("year")["taux_chomage"].mean()
     fig, ax = plt.subplots(figsize=(12, 4))
-    ax.plot(chomage_annuel.index, chomage_annuel.values,
-            color="#2D2D6B", linewidth=2.5, marker="o", markersize=4)
+    ax.plot(chomage_annuel.index, chomage_annuel.values, color="#2D2D6B", linewidth=2.5, marker="o", markersize=4)
     ax.axvline(x=2008, color="#E74C8B", linestyle="--", linewidth=1.5, label="Crise 2008")
     ax.axvline(x=2020, color="#F4C542", linestyle="--", linewidth=1.5, label="COVID-19")
     ax.fill_between(chomage_annuel.index, chomage_annuel.values, alpha=0.15, color="#7B2FBE")
     ax.set_title("Évolution du Chômage Mondial Moyen (1991–2025)", fontsize=14, fontweight="bold", color="#2D2D6B")
-    ax.set_xlabel("Année", color="#2D2D6B"); ax.set_ylabel("Taux (%)", color="#2D2D6B")
+    ax.set_xlabel("Année"); ax.set_ylabel("Taux (%)")
     ax.legend(); ax.grid(True, alpha=0.3)
-    plt.tight_layout()
-    return fig
+    plt.tight_layout(); return fig
 
 
 def graphique_genre(df):
@@ -390,8 +308,7 @@ def graphique_genre(df):
     sns.boxplot(data=df[df["sex"] != "Total"], x="sex", y="taux_chomage", palette=couleurs, ax=ax2)
     ax2.set_title("Distribution par Genre", fontsize=12, fontweight="bold", color="#2D2D6B")
     ax2.set_xlabel("Genre"); ax2.set_ylabel("Taux (%)"); ax2.grid(axis="y", alpha=0.3)
-    plt.tight_layout()
-    return fig
+    plt.tight_layout(); return fig
 
 
 def graphique_age(df):
@@ -407,8 +324,7 @@ def graphique_age(df):
     sns.boxplot(data=df_total, x="age", y="taux_chomage", palette=palette, ax=ax2)
     ax2.set_title("Distribution par Groupe d'Âge", fontsize=12, fontweight="bold", color="#2D2D6B")
     ax2.set_xlabel("Groupe d'âge"); ax2.set_ylabel("Taux (%)"); ax2.grid(axis="y", alpha=0.3)
-    plt.tight_layout()
-    return fig
+    plt.tight_layout(); return fig
 
 
 def graphique_covid(df):
@@ -417,20 +333,17 @@ def graphique_covid(df):
         lambda a: "Avant COVID (≤ 2019)" if a < 2020 else "Après COVID (≥ 2020)"
     )
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 4))
-    moy = df_total.groupby("periode")["taux_chomage"].mean()
-    barres = ax1.bar(moy.index, moy.values, color=["#2D2D6B", "#E74C8B"],
-                     edgecolor="black", alpha=0.85, width=0.5)
+    moy    = df_total.groupby("periode")["taux_chomage"].mean()
+    barres = ax1.bar(moy.index, moy.values, color=["#2D2D6B", "#E74C8B"], edgecolor="black", alpha=0.85, width=0.5)
     for b, v in zip(barres, moy.values):
-        ax1.text(b.get_x() + b.get_width()/2, b.get_height() + 0.15,
-                 f"{v:.2f}%", ha="center", fontweight="bold", color="#1E1B4B")
+        ax1.text(b.get_x() + b.get_width()/2, b.get_height() + 0.15, f"{v:.2f}%", ha="center", fontweight="bold")
     ax1.set_title("Moyenne Avant vs Après COVID", fontsize=12, fontweight="bold", color="#2D2D6B")
     ax1.set_ylabel("Taux moyen (%)"); ax1.set_ylim(0, moy.max()*1.3); ax1.grid(axis="y", alpha=0.3)
     palette_covid = {"Avant COVID (≤ 2019)": "#2D2D6B", "Après COVID (≥ 2020)": "#E74C8B"}
     sns.boxplot(data=df_total, x="periode", y="taux_chomage", palette=palette_covid, ax=ax2)
     ax2.set_title("Distribution par Période", fontsize=12, fontweight="bold", color="#2D2D6B")
     ax2.set_xlabel(""); ax2.set_ylabel("Taux (%)"); ax2.grid(axis="y", alpha=0.3)
-    plt.tight_layout()
-    return fig
+    plt.tight_layout(); return fig
 
 
 def graphique_top_pays(df):
@@ -439,17 +352,14 @@ def graphique_top_pays(df):
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
     bas = moy_pays.head(10); haut = moy_pays.tail(10)
     ax1.barh(bas.index, bas.values, color="#0D9488", edgecolor="black", alpha=0.85)
-    for i, v in enumerate(bas.values):
-        ax1.text(v+0.1, i, f"{v:.1f}%", va="center", fontsize=9, color="#1E1B4B")
+    for i, v in enumerate(bas.values): ax1.text(v+0.1, i, f"{v:.1f}%", va="center", fontsize=9)
     ax1.set_title("Top 10 — Chômage le Plus BAS", fontsize=11, fontweight="bold", color="#2D2D6B")
     ax1.set_xlabel("Taux moyen (%)"); ax1.grid(axis="x", alpha=0.3)
     ax2.barh(haut.index, haut.values, color="#E74C8B", edgecolor="black", alpha=0.85)
-    for i, v in enumerate(haut.values):
-        ax2.text(v+0.1, i, f"{v:.1f}%", va="center", fontsize=9, color="#1E1B4B")
+    for i, v in enumerate(haut.values): ax2.text(v+0.1, i, f"{v:.1f}%", va="center", fontsize=9)
     ax2.set_title("Top 10 — Chômage le Plus ÉLEVÉ", fontsize=11, fontweight="bold", color="#2D2D6B")
     ax2.set_xlabel("Taux moyen (%)"); ax2.grid(axis="x", alpha=0.3)
-    plt.tight_layout()
-    return fig
+    plt.tight_layout(); return fig
 
 
 def graphique_correlation(df):
@@ -462,11 +372,10 @@ def graphique_correlation(df):
     corr = df[cols_num].corr()
     fig, ax = plt.subplots(figsize=(12, 8))
     masque = np.triu(np.ones_like(corr, dtype=bool))
-    sns.heatmap(corr, mask=masque, annot=True, fmt=".2f", cmap="RdPu", center=0,
-                linewidths=0.5, ax=ax, annot_kws={"color": "#1E1B4B", "size": 8})
+    sns.heatmap(corr, mask=masque, annot=True, fmt=".2f", cmap="RdPu",
+                center=0, linewidths=0.5, ax=ax, annot_kws={"size": 8})
     ax.set_title("Matrice de Corrélation", fontsize=13, fontweight="bold", color="#2D2D6B")
-    plt.tight_layout()
-    return fig
+    plt.tight_layout(); return fig
 
 
 # ==============================================================================
@@ -481,22 +390,15 @@ def graphique_predictions_vs_reels(y_test, y_pred, mae, r2):
     ax.fill_between(lim, [lim[0]-mae, lim[1]-mae], [lim[0]+mae, lim[1]+mae],
                     alpha=0.1, color="#F4C542", label=f"Zone ±MAE ({mae:.2f}%)")
     ax.set_xlim(lim); ax.set_ylim(lim)
-    ax.set_xlabel("Valeurs Réelles (%)", fontsize=12, color="#2D2D6B")
-    ax.set_ylabel("Valeurs Prédites (%)", fontsize=12, color="#2D2D6B")
-    ax.set_title(f"Prédictions vs Réalité\nMAE={mae:.2f}%  |  R²={r2:.3f}",
-                 fontsize=13, fontweight="bold", color="#2D2D6B")
+    ax.set_xlabel("Valeurs Réelles (%)", fontsize=12)
+    ax.set_ylabel("Valeurs Prédites (%)", fontsize=12)
+    ax.set_title(f"Prédictions vs Réalité\nMAE={mae:.2f}%  |  R²={r2:.3f}", fontsize=13, fontweight="bold")
     ax.legend(); ax.grid(True, alpha=0.3)
-    plt.tight_layout()
-    return fig
+    plt.tight_layout(); return fig
 
 
 def graphique_comparaison_annees(df, modele, feature_cols, le_sex, le_age, le_country,
                                   pays, genre, age_grp):
-    """
-    Graphique Réel vs XGBoost avec prédiction en CASCADE pour le futur.
-    FIX : utilise _build_feature_row() pour zéro duplication.
-    FIX : utilise les encodeurs sauvegardés (cohérents avec l'entraînement).
-    """
     df_hist = df[(df["country"]==pays) & (df["sex"]==genre) & (df["age"]==age_grp)].sort_values("year").copy()
     if len(df_hist) == 0:
         return None
@@ -506,7 +408,7 @@ def graphique_comparaison_annees(df, modele, feature_cols, le_sex, le_age, le_co
     country_enc = int(le_country.transform([pays])[0])
     taux_emploi_moyen = df_hist["taux_emploi"].mean()
 
-    # ── 1. Prédictions sur les années HISTORIQUES ────────────────────────────
+    # Prédictions historiques
     annees_historiques = sorted(df_hist["year"].unique())
     lignes_hist = []
     for annee in annees_historiques:
@@ -533,11 +435,11 @@ def graphique_comparaison_annees(df, modele, feature_cols, le_sex, le_age, le_co
             df_hist_input[col] = 0
     pred_historiques = modele.predict(df_hist_input[feature_cols])
 
-    # ── 2. Prédictions FUTURES en CASCADE ───────────────────────────────────
+    # Prédictions futures en cascade
     valeurs_connues = list(df_hist["taux_chomage"].values)
     annees_futures  = list(range(2026, 2046))
     pred_futures    = []
-    fenetre         = valeurs_connues[-5:].copy()  # 5 dernières valeurs connues
+    fenetre         = valeurs_connues[-5:].copy()
 
     for annee in annees_futures:
         lag1     = fenetre[-1]
@@ -545,7 +447,7 @@ def graphique_comparaison_annees(df, modele, feature_cols, le_sex, le_age, le_co
         rolling3 = float(np.mean(fenetre[-3:]))
         rolling5 = float(np.mean(fenetre[-5:]))
         delta    = fenetre[-1] - fenetre[-2] if len(fenetre) >= 2 else 0.0
-        delta2   = (fenetre[-1] - fenetre[-2]) - (fenetre[-2] - fenetre[-3]) if len(fenetre) >= 3 else 0.0
+        delta2   = (fenetre[-1]-fenetre[-2])-(fenetre[-2]-fenetre[-3]) if len(fenetre) >= 3 else 0.0
 
         df_entree = _build_feature_row(
             annee, taux_emploi_moyen, sex_enc, age_enc, country_enc,
@@ -556,7 +458,6 @@ def graphique_comparaison_annees(df, modele, feature_cols, le_sex, le_age, le_co
         pred_futures.append(pred)
         fenetre.append(pred)
 
-    # ── 3. Construction du graphique ─────────────────────────────────────────
     fig = go.Figure()
     fig.add_trace(go.Scatter(
         x=list(df_hist["year"]), y=list(df_hist["taux_chomage"]),
@@ -585,8 +486,7 @@ def graphique_comparaison_annees(df, modele, feature_cols, le_sex, le_age, le_co
         xaxis_title="Année", yaxis_title="Taux de chômage (%)",
         template="plotly_white", hovermode="x unified", height=420,
         legend=dict(x=0.01, y=0.99, bgcolor="rgba(255,255,255,0.9)",
-                    bordercolor="#D8B4FE", borderwidth=1,
-                    font=dict(color="#2D2D6B", size=11))
+                    bordercolor="#D8B4FE", borderwidth=1)
     )
     return fig
 
@@ -598,11 +498,10 @@ def graphique_importances(importances):
     barres   = ax.barh(top10.index[::-1], top10.values[::-1], color=couleurs, edgecolor="#2D2D6B", alpha=0.85)
     for barre, val in zip(barres, top10.values[::-1]):
         ax.text(barre.get_width()+0.001, barre.get_y()+barre.get_height()/2,
-                f"{val:.3f}", va="center", fontsize=9, color="#1E1B4B")
+                f"{val:.3f}", va="center", fontsize=9)
     ax.set_title("Importance des Variables — XGBoost", fontsize=12, fontweight="bold", color="#2D2D6B")
-    ax.set_xlabel("Importance", color="#2D2D6B"); ax.grid(axis="x", alpha=0.3)
-    plt.tight_layout()
-    return fig
+    ax.set_xlabel("Importance"); ax.grid(axis="x", alpha=0.3)
+    plt.tight_layout(); return fig
 
 
 def graphique_residus(y_test, y_pred):
@@ -610,35 +509,32 @@ def graphique_residus(y_test, y_pred):
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 4))
     sns.histplot(residus, kde=True, color="#7B2FBE", bins=50, edgecolor="black", alpha=0.7, ax=ax1)
     ax1.axvline(0, color="#E74C8B", linestyle="--", linewidth=2, label="0 = parfait")
-    ax1.set_title("Distribution des Résidus", fontsize=12, fontweight="bold", color="#2D2D6B")
-    ax1.set_xlabel("Résidu (Réel - Prédit)", color="#2D2D6B")
-    ax1.set_ylabel("Fréquence", color="#2D2D6B"); ax1.legend(); ax1.grid(axis="y", alpha=0.3)
+    ax1.set_title("Distribution des Résidus", fontsize=12, fontweight="bold")
+    ax1.set_xlabel("Résidu (Réel - Prédit)"); ax1.set_ylabel("Fréquence")
+    ax1.legend(); ax1.grid(axis="y", alpha=0.3)
     ax2.scatter(y_pred, residus, alpha=0.3, color="#2D2D6B", s=10)
     ax2.axhline(0, color="#E74C8B", linestyle="--", linewidth=2)
-    ax2.set_title("Résidus vs Prédictions", fontsize=12, fontweight="bold", color="#2D2D6B")
-    ax2.set_xlabel("Valeurs Prédites (%)", color="#2D2D6B")
-    ax2.set_ylabel("Résidu", color="#2D2D6B"); ax2.grid(True, alpha=0.3)
-    plt.tight_layout()
-    return fig
+    ax2.set_title("Résidus vs Prédictions", fontsize=12, fontweight="bold")
+    ax2.set_xlabel("Valeurs Prédites (%)"); ax2.set_ylabel("Résidu")
+    ax2.grid(True, alpha=0.3)
+    plt.tight_layout(); return fig
 
 
 def graphique_cv_scores(cv_scores):
-    """Graphique des scores de validation croisée temporelle."""
     fig, ax = plt.subplots(figsize=(8, 5))
-    folds = [f"Fold {i+1}" for i in range(len(cv_scores))]
+    folds    = [f"Fold {i+1}" for i in range(len(cv_scores))]
     couleurs = ["#E74C8B" if v == max(cv_scores) else "#7B2FBE" for v in cv_scores]
-    barres = ax.bar(folds, cv_scores, color=couleurs, edgecolor="#2D2D6B", alpha=0.85)
+    barres   = ax.bar(folds, cv_scores, color=couleurs, edgecolor="#2D2D6B", alpha=0.85)
     ymax = max(cv_scores)
     ax.set_ylim(0, ymax * 1.35)
     for b, v in zip(barres, cv_scores):
-        ax.text(b.get_x() + b.get_width()/2, b.get_height() + ymax * 0.02,
-                f"{v:.3f}%", ha="center", va="bottom", fontsize=10, fontweight="bold", color="#1E1B4B")
+        ax.text(b.get_x()+b.get_width()/2, b.get_height()+ymax*0.02,
+                f"{v:.3f}%", ha="center", fontsize=10, fontweight="bold")
     ax.axhline(np.mean(cv_scores), color="#F4C542", linestyle="--", linewidth=2,
                label=f"Moyenne : {np.mean(cv_scores):.3f}%")
-    ax.set_title("MAE par Fold — TimeSeriesSplit (5 folds)", fontsize=12, fontweight="bold", color="#2D2D6B", pad=15)
-    ax.set_ylabel("MAE (%)", color="#2D2D6B"); ax.legend(); ax.grid(axis="y", alpha=0.3)
-    plt.tight_layout()
-    return fig
+    ax.set_title("MAE par Fold — TimeSeriesSplit (5 folds)", fontsize=12, fontweight="bold", color="#2D2D6B")
+    ax.set_ylabel("MAE (%)"); ax.legend(); ax.grid(axis="y", alpha=0.3)
+    plt.tight_layout(); return fig
 
 
 # ==============================================================================
@@ -649,20 +545,13 @@ def main():
 
     with st.sidebar:
         st.markdown("## 🌍 Navigation")
-        section = st.radio(
-            "Choisir une section :",
-            [
-                "🏠 Accueil",
-                "📂 Données & Nettoyage",
-                "📊 Analyse Exploratoire",
-                "🗺️ Carte Mondiale",
-                "🤖 Modèle & Évaluation",
-                "🎯 Interface de Prédiction",
-            ]
-        )
+        section = st.radio("Choisir une section :", [
+            "🏠 Accueil", "📂 Données & Nettoyage", "📊 Analyse Exploratoire",
+            "🗺️ Carte Mondiale", "🤖 Modèle & Évaluation", "🎯 Interface de Prédiction",
+        ])
         st.markdown("---")
         st.markdown("**📦 Dataset**")
-        st.markdown("📌 Source : Kaggle")
+        st.markdown("📌 Source : Kaggle — données ILO/ILOSTAT")
         st.markdown("📌 183 pays | 1991–2025")
         st.markdown("📌 57 519 lignes")
         st.markdown("---")
@@ -681,9 +570,9 @@ def main():
         st.markdown("---")
 
         c1, c2, c3, c4 = st.columns(4)
-        c1.metric("🌍 Pays", "183")
-        c2.metric("📅 Période", "1991–2025")
-        c3.metric("📊 Lignes", f"{len(df):,}")
+        c1.metric("🌍 Pays",     "183")
+        c2.metric("📅 Période",  "1991–2025")
+        c3.metric("📊 Lignes",   f"{len(df):,}")
         c4.metric("📋 Colonnes", len(df.columns))
 
         st.markdown("---")
@@ -731,10 +620,10 @@ def main():
 
         st.markdown('<div class="section-title">🔍 Exploration Initiale</div>', unsafe_allow_html=True)
         c1, c2, c3, c4 = st.columns(4)
-        c1.metric("Lignes", f"{len(df):,}")
-        c2.metric("Colonnes", len(df.columns))
-        c3.metric("Pays", df["country"].nunique())
-        c4.metric("Valeurs NaN", df.isnull().sum().sum())
+        c1.metric("Lignes",      f"{len(df):,}")
+        c2.metric("Colonnes",    len(df.columns))
+        c3.metric("Pays",        df["country"].nunique())
+        c4.metric("Valeurs NaN", df.isnull().sum().sum())   # ✅ Doit afficher 0
 
         st.markdown("**df.head() :**")
         st.dataframe(df.head(10), use_container_width=True)
@@ -762,45 +651,29 @@ def main():
         with st.expander("✅ Étape 3 — Renommage des colonnes", expanded=True):
             st.code("df_chomage.rename(columns={'obs_value': 'taux_chomage'}, inplace=True)", language="python")
             st.success("✅ Colonnes renommées")
-        with st.expander("✅ Étape 4 — Fusion des deux datasets (left join)", expanded=True):
+        with st.expander("✅ Étape 4 — Fusion (left join + imputation médiane)", expanded=True):
             st.code("""df = pd.merge(df_chomage, df_emploi[...], on=[...], how='left')
 df['taux_emploi'] = df.groupby(['country','sex','age'])['taux_emploi']
                       .transform(lambda x: x.fillna(x.median()))""", language="python")
-            st.success(f"✅ Shape finale : {df.shape[0]:,} lignes × {df.shape[1]} colonnes")
+            st.success(f"✅ {df.shape[0]:,} lignes × {df.shape[1]} colonnes")
         with st.expander("✅ Étape 5 — Feature Engineering", expanded=True):
             st.code("""df['post_covid'] = (df['year'] >= 2020).astype(int)
 df['post_2008']  = ((df['year'] >= 2008) & (df['year'] <= 2013)).astype(int)
 df['decennie']   = (df['year'] // 10) * 10""", language="python")
-            c1, c2, c3 = st.columns(3)
-            c1.metric("post_covid=1", f"{(df['post_covid']==1).sum():,}")
-            c2.metric("post_2008=1",  f"{(df['post_2008']==1).sum():,}")
-            c3.metric("Décennies",    df["decennie"].nunique())
-        with st.expander("✅ Étape 6 — Encodage LabelEncoder (cohérent)", expanded=True):
-            st.code("""# FIX : encodeurs créés une seule fois sur tout le dataset
-le_sex     = LabelEncoder().fit(df['sex'])
+        with st.expander("✅ Étape 6 — Encodage LabelEncoder", expanded=True):
+            st.code("""le_sex     = LabelEncoder().fit(df['sex'])
 le_age     = LabelEncoder().fit(df['age'])
-le_country = LabelEncoder().fit(df['country'])
-df['sex_encoded']     = le_sex.transform(df['sex'])
-df['age_encoded']     = le_age.transform(df['age'])
-df['country_encoded'] = le_country.transform(df['country'])""", language="python")
-        with st.expander("✅ Étape 7 — Lag Features enrichies (6 features temporelles)", expanded=True):
-            st.code("""df = df.sort_values(['country', 'sex', 'age', 'year'])
-grp = df.groupby(['country', 'sex', 'age'])['taux_chomage']
-
-df['chomage_lag1']     = grp.shift(1)            # N-1
-df['chomage_lag2']     = grp.shift(2)            # N-2
+le_country = LabelEncoder().fit(df['country'])""", language="python")
+        with st.expander("✅ Étape 7 — Lag Features (6 features temporelles) — 0 NaN ✅", expanded=True):
+            st.code("""# FIX 0 NaN : min_periods=1 + fillna(0) sur tous les rolling/delta
+df['chomage_lag1']     = grp.shift(1)
+df['chomage_lag2']     = grp.shift(2).fillna(lag1)   # ← fillna
 df['chomage_rolling3'] = grp.transform(lambda x: x.shift(1).rolling(3, min_periods=1).mean())
-df['chomage_rolling5'] = grp.transform(lambda x: x.shift(1).rolling(5, min_periods=2).mean())
-df['chomage_delta']    = grp.diff()              # tendance
-df['chomage_delta2']   = grp.diff().diff()       # accélération
-
-df.dropna(subset=['chomage_lag1'], inplace=True)""", language="python")
-            cols_lag = ["chomage_lag1","chomage_lag2","chomage_rolling3","chomage_rolling5","chomage_delta","chomage_delta2"]
-            for i, col in enumerate(cols_lag):
-                if i % 3 == 0:
-                    cols_ui = st.columns(3)
-                if col in df.columns:
-                    cols_ui[i % 3].metric(col, "✅ Ajouté")
+df['chomage_rolling5'] = grp.transform(lambda x: x.shift(1).rolling(5, min_periods=1).mean())
+df['chomage_delta']    = grp.diff().fillna(0)         # ← fillna(0)
+df['chomage_delta2']   = grp.diff().diff().fillna(0)  # ← fillna(0)
+df.dropna(subset=['chomage_lag1'], inplace=True)       # seule vraie NaN""", language="python")
+            st.success("✅ 0 NaN — toutes les features sont complètes")
 
     # ==========================================================================
     # PAGE 3 : ANALYSE EXPLORATOIRE
@@ -838,7 +711,7 @@ df.dropna(subset=['chomage_lag1'], inplace=True)""", language="python")
 
         st.markdown('<div class="section-title">🔥 Matrice de Corrélation</div>', unsafe_allow_html=True)
         st.pyplot(graphique_correlation(df), use_container_width=True); plt.close()
-        st.caption("chomage_lag1 est très fortement corrélé à taux_chomage → feature clé du modèle.")
+        st.caption("chomage_lag1 est très fortement corrélé à taux_chomage → feature clé.")
 
     # ==========================================================================
     # PAGE 4 : CARTE MONDIALE
@@ -883,15 +756,12 @@ df.dropna(subset=['chomage_lag1'], inplace=True)""", language="python")
         1. **Arbre 1** → première prédiction (imparfaite)
         2. **Arbre 2** → corrige les erreurs de l'arbre 1
         3. **Arbre 3** → corrige les erreurs des arbres 1+2
-        4. ... jusqu'à **500 arbres** + early stopping → résultat très précis !
+        4. ... jusqu'à **500 arbres** + early stopping !
 
-        **Lag Features enrichies (6 features temporelles) :**
-        - `chomage_lag1` : taux N-1 → mémoire immédiate
-        - `chomage_lag2` : taux N-2 → mémoire plus longue
-        - `chomage_rolling3` : moyenne 3 ans → tendance lissée
-        - `chomage_rolling5` : moyenne 5 ans → tendance longue durée
-        - `chomage_delta` : différence N vs N-1 → direction
-        - `chomage_delta2` : accélération → vitesse de changement
+        **6 features temporelles (Lag Features) :**
+        - `chomage_lag1` : taux N-1 | `chomage_lag2` : taux N-2
+        - `chomage_rolling3` : moyenne 3 ans | `chomage_rolling5` : moyenne 5 ans
+        - `chomage_delta` : tendance | `chomage_delta2` : accélération
         """)
 
         c1, c2, c3 = st.columns(3)
@@ -899,29 +769,15 @@ df.dropna(subset=['chomage_lag1'], inplace=True)""", language="python")
         c2.info("**Variable cible**\ntaux_chomage (%)")
         c3.info("**Split**\n80% train / 20% test (temporel)")
 
-        st.markdown('<div class="section-title">⚙️ Code du Modèle (amélioré)</div>', unsafe_allow_html=True)
-        with st.expander("Voir le code complet", expanded=False):
+        with st.expander("⚙️ Voir le code du modèle", expanded=False):
             st.code("""
-# FIX 1 : Split TEMPOREL — pas de data leakage
-df_model_sorted = df_model.sort_values('year')
-split_idx = int(len(df_model_sorted) * 0.8)
-X_train = df_model_sorted.iloc[:split_idx][feature_cols]
-X_test  = df_model_sorted.iloc[split_idx:][feature_cols]
-
-# FIX 2 : Hyperparamètres optimisés + early stopping
 modele = XGBRegressor(
-    n_estimators=500,
-    max_depth=5,
-    learning_rate=0.05,
-    subsample=0.8,
-    colsample_bytree=0.7,
-    min_child_weight=3,
-    gamma=0.1,
-    reg_alpha=0.05,
-    reg_lambda=1.0,
-    early_stopping_rounds=30,
-    eval_metric='mae',
-    random_state=42, n_jobs=-1
+    n_estimators=500,       max_depth=5,
+    learning_rate=0.05,     subsample=0.8,
+    colsample_bytree=0.7,   min_child_weight=3,
+    gamma=0.1,              reg_alpha=0.05,
+    reg_lambda=1.0,         early_stopping_rounds=30,
+    eval_metric='mae',      random_state=42
 )
 modele.fit(X_train, y_train, eval_set=[(X_test, y_test)], verbose=False)
             """, language="python")
@@ -929,69 +785,53 @@ modele.fit(X_train, y_train, eval_set=[(X_test, y_test)], verbose=False)
         with st.spinner("⚡ Entraînement XGBoost en cours..."):
             modele, X_test, y_test, y_pred, mae, r2, importances, feature_cols, le_sex, le_age, le_country = entrainer_modele(df)
 
-        st.markdown('<div class="section-title">📏 Résultats de l\'Évaluation</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-title">📏 Résultats</div>', unsafe_allow_html=True)
         c1, c2, c3, c4 = st.columns(4)
-        c1.metric("MAE",   f"{mae:.2f}%", help="Erreur moyenne en points de %")
-        c2.metric("R²",    f"{r2:.3f}",   help="1.0 = parfait")
-        c3.metric("Train (temporel)", f"{int(len(df)*0.8):,}")
+        c1.metric("MAE",   f"{mae:.2f}%")
+        c2.metric("R²",    f"{r2:.3f}")
+        c3.metric("Train", f"{int(len(df)*0.8):,}")
         c4.metric("Test",  f"{int(len(df)*0.2):,}")
 
         st.markdown(f"""
         - **MAE = {mae:.2f}%** → XGBoost se trompe en moyenne de ±{mae:.2f} points de %
         - **R² = {r2:.3f}** → Le modèle explique **{r2*100:.1f}%** de la variance du chômage
-        - **Split temporel** → Évaluation honnête, sans data leakage
         """)
-
-        if r2 >= 0.90:
-            st.success(f"✅ Excellent modèle ! R² = {r2:.3f}")
-        elif r2 >= 0.75:
-            st.warning(f"⚠️ Bon modèle. R² = {r2:.3f}")
-        else:
-            st.error(f"❌ Modèle à améliorer. R² = {r2:.3f}")
+        if r2 >= 0.90: st.success(f"✅ Excellent modèle ! R² = {r2:.3f}")
+        elif r2 >= 0.75: st.warning(f"⚠️ Bon modèle. R² = {r2:.3f}")
+        else: st.error(f"❌ Modèle à améliorer. R² = {r2:.3f}")
 
         c1, c2 = st.columns(2)
         with c1:
             st.markdown('<div class="section-title">📊 Prédictions vs Réalité</div>', unsafe_allow_html=True)
             st.pyplot(graphique_predictions_vs_reels(y_test, y_pred, mae, r2), use_container_width=True); plt.close()
-            st.caption("Points sur la ligne rouge = prédiction parfaite.")
         with c2:
             st.markdown('<div class="section-title">🏆 Importance des Variables</div>', unsafe_allow_html=True)
             st.pyplot(graphique_importances(importances), use_container_width=True); plt.close()
-            st.caption("chomage_lag1 devrait dominer — c'est la feature la plus prédictive.")
+            st.caption("chomage_lag1 devrait dominer — feature la plus prédictive.")
 
         st.markdown('<div class="section-title">🔍 Analyse des Résidus</div>', unsafe_allow_html=True)
         st.pyplot(graphique_residus(y_test, y_pred), use_container_width=True); plt.close()
-        st.caption("Résidus centrés sur 0 → pas de biais systématique.")
 
-        # ── Validation croisée temporelle ──────────────────────────────────────
         st.markdown('<div class="section-title">⏳ Validation Croisée Temporelle (TimeSeriesSplit)</div>', unsafe_allow_html=True)
-        st.caption("Simule des prédictions sur des périodes futures successives — évaluation la plus réaliste.")
-
         with st.spinner("Calcul de la cross-validation temporelle (5 folds)..."):
             df_cv = df.copy()
-            df_cv.drop(columns=["iso_code", "country", "sex", "age"], inplace=True, errors="ignore")
+            df_cv.drop(columns=["iso_code","country","sex","age"], inplace=True, errors="ignore")
             df_cv.dropna(inplace=True)
             df_cv = df_cv.sort_values("year").reset_index(drop=True)
-
             feat_cv = [c for c in df_cv.columns if c != "taux_chomage"]
-            X_cv = df_cv[feat_cv]
-            y_cv = df_cv["taux_chomage"]
-
+            X_cv = df_cv[feat_cv]; y_cv = df_cv["taux_chomage"]
             tscv = TimeSeriesSplit(n_splits=5)
             cv_scores = []
             for train_idx, val_idx in tscv.split(X_cv):
-                m = XGBRegressor(
-                    n_estimators=300, max_depth=5, learning_rate=0.05,
-                    subsample=0.8, colsample_bytree=0.7, random_state=42, n_jobs=-1
-                )
+                m = XGBRegressor(n_estimators=300, max_depth=5, learning_rate=0.05,
+                                 subsample=0.8, colsample_bytree=0.7, random_state=42, n_jobs=-1)
                 m.fit(X_cv.iloc[train_idx], y_cv.iloc[train_idx])
                 cv_scores.append(mean_absolute_error(y_cv.iloc[val_idx], m.predict(X_cv.iloc[val_idx])))
 
         c1, c2, c3 = st.columns(3)
         c1.metric("MAE moyenne (CV)", f"{np.mean(cv_scores):.3f}%")
-        c2.metric("Écart-type", f"±{np.std(cv_scores):.3f}%")
-        c3.metric("Meilleur fold", f"{min(cv_scores):.3f}%")
-
+        c2.metric("Écart-type",       f"±{np.std(cv_scores):.3f}%")
+        c3.metric("Meilleur fold",    f"{min(cv_scores):.3f}%")
         st.pyplot(graphique_cv_scores(cv_scores), use_container_width=True); plt.close()
 
     # ==========================================================================
@@ -1018,7 +858,7 @@ modele.fit(X_train, y_train, eval_set=[(X_test, y_test)], verbose=False)
             annee   = st.slider("📅 Année", min_value=1991, max_value=2045, value=2026, step=1)
 
             if annee > 2025:
-                st.info(f" {annee} est une année future — prédiction extrapolée")
+                st.info(f"📈 Tendance projetée {annee} — scénario stable")
             else:
                 st.info(f"📌 {annee} est une année connue dans ILOSTAT")
 
@@ -1028,7 +868,6 @@ modele.fit(X_train, y_train, eval_set=[(X_test, y_test)], verbose=False)
             st.markdown('<div class="section-title">📊 Résultat</div>', unsafe_allow_html=True)
 
             if predict_btn:
-                # FIX : on utilise les encodeurs sauvegardés (cohérents avec l'entraînement)
                 sex_enc     = int(le_sex.transform([genre])[0])
                 age_enc     = int(le_age.transform([age_grp])[0])
                 country_enc = int(le_country.transform([pays])[0])
@@ -1036,19 +875,16 @@ modele.fit(X_train, y_train, eval_set=[(X_test, y_test)], verbose=False)
                 masque  = (df["country"]==pays) & (df["sex"]==genre) & (df["age"]==age_grp)
                 df_pays = df[masque].sort_values("year")
 
-                # ── Construire les lag features pour l'année demandée ────────
                 if annee <= 2025 and annee in df_pays["year"].values:
-                    row = df_pays[df_pays["year"] == annee].iloc[0]
-                    lag1        = row["chomage_lag1"]
-                    lag2        = row.get("chomage_lag2", lag1)
-                    rolling3    = row["chomage_rolling3"]
-                    rolling5    = row.get("chomage_rolling5", rolling3)
-                    delta       = row["chomage_delta"]
-                    delta2      = row.get("chomage_delta2", 0.0)
+                    row             = df_pays[df_pays["year"] == annee].iloc[0]
+                    lag1            = row["chomage_lag1"]
+                    lag2            = row.get("chomage_lag2", lag1)
+                    rolling3        = row["chomage_rolling3"]
+                    rolling5        = row.get("chomage_rolling5", rolling3)
+                    delta           = row["chomage_delta"]
+                    delta2          = row.get("chomage_delta2", 0.0)
                     taux_emploi_val = row["taux_emploi"]
-
                 else:
-                    # Propagation en CASCADE depuis la dernière année connue
                     if len(df_pays) == 0:
                         src = df[(df["sex"]==genre) & (df["age"]==age_grp)].sort_values("year")
                         taux_emploi_val = src["taux_emploi"].mean()
@@ -1057,35 +893,27 @@ modele.fit(X_train, y_train, eval_set=[(X_test, y_test)], verbose=False)
                         taux_emploi_val = df_pays["taux_emploi"].mean()
                         fenetre = list(df_pays["taux_chomage"].values[-5:])
 
-                    derniere_annee_connue = int(df_pays["year"].max()) if len(df_pays) > 0 else 2025
-                    annee_courante = derniere_annee_connue + 1
-
-                    while annee_courante <= annee:
+                    derniere = int(df_pays["year"].max()) if len(df_pays) > 0 else 2025
+                    a = derniere + 1
+                    while a <= annee:
                         l1 = fenetre[-1]
                         l2 = fenetre[-2] if len(fenetre) >= 2 else l1
                         r3 = float(np.mean(fenetre[-3:]))
                         r5 = float(np.mean(fenetre[-5:]))
-                        d1 = fenetre[-1] - fenetre[-2] if len(fenetre) >= 2 else 0.0
+                        d1 = fenetre[-1]-fenetre[-2] if len(fenetre) >= 2 else 0.0
                         d2 = (fenetre[-1]-fenetre[-2])-(fenetre[-2]-fenetre[-3]) if len(fenetre) >= 3 else 0.0
-
-                        df_c = _build_feature_row(
-                            annee_courante, taux_emploi_val,
-                            sex_enc, age_enc, country_enc,
-                            l1, r3, d1, feature_cols,
-                            lag2=l2, rolling5=r5, delta2=d2
-                        )
-                        pred_c = max(0.0, float(modele.predict(df_c)[0]))
-                        fenetre.append(pred_c)
-                        annee_courante += 1
+                        df_c = _build_feature_row(a, taux_emploi_val, sex_enc, age_enc, country_enc,
+                                                  l1, r3, d1, feature_cols, lag2=l2, rolling5=r5, delta2=d2)
+                        fenetre.append(max(0.0, float(modele.predict(df_c)[0])))
+                        a += 1
 
                     lag1     = fenetre[-2]
                     lag2     = fenetre[-3] if len(fenetre) >= 3 else lag1
                     rolling3 = float(np.mean(fenetre[-4:-1]))
                     rolling5 = float(np.mean(fenetre[-6:-1]))
-                    delta    = fenetre[-2] - fenetre[-3] if len(fenetre) >= 3 else 0.0
+                    delta    = fenetre[-2]-fenetre[-3] if len(fenetre) >= 3 else 0.0
                     delta2   = (fenetre[-2]-fenetre[-3])-(fenetre[-3]-fenetre[-4]) if len(fenetre) >= 4 else 0.0
 
-                # FIX : utilise _build_feature_row() — zéro duplication
                 df_entree  = _build_feature_row(
                     annee, taux_emploi_val, sex_enc, age_enc, country_enc,
                     lag1, rolling3, delta, feature_cols,
@@ -1093,7 +921,7 @@ modele.fit(X_train, y_train, eval_set=[(X_test, y_test)], verbose=False)
                 )
                 prediction = max(0.0, round(float(modele.predict(df_entree)[0]), 2))
 
-                masque_reel   = (df["country"]==pays) & (df["sex"]==genre) & (df["age"]==age_grp) & (df["year"]==annee)
+                masque_reel   = masque & (df["year"]==annee)
                 valeur_reelle = df[masque_reel]["taux_chomage"].values
                 valeur_reelle = float(valeur_reelle[0]) if len(valeur_reelle) > 0 else None
 
@@ -1102,20 +930,14 @@ modele.fit(X_train, y_train, eval_set=[(X_test, y_test)], verbose=False)
                             border-radius: 16px; padding: 1.5rem; text-align: center;
                             color: #FFFFFF; margin: 0.5rem 0;
                             box-shadow: 0 4px 20px rgba(123,47,190,0.3);">
-                    <div style="font-size: 0.82rem; opacity: 0.9; letter-spacing: 0.4px;">
-                        Taux de chômage prédit (XGBoost)
-                    </div>
-                    <div style="font-size: 0.92rem; font-weight: 600; margin: 0.3rem 0; opacity: 0.95;">
+                    <div style="font-size: 0.82rem; opacity: 0.9;">Taux de chômage prédit (XGBoost)</div>
+                    <div style="font-size: 0.92rem; font-weight: 600; margin: 0.3rem 0;">
                         {pays} — {genre} — {age_grp} — {annee}
                     </div>
-                    <div style="font-size: 3rem; font-weight: 800;
-                                color: #FFF9C4; text-shadow: 0 2px 8px rgba(0,0,0,0.25);
-                                margin: 0.3rem 0;">
+                    <div style="font-size: 3rem; font-weight: 800; color: #FFF9C4; margin: 0.3rem 0;">
                         {prediction:.2f}%
                     </div>
-                    <div style="font-size: 0.76rem; opacity: 0.8; margin-top: 0.4rem;">
-                        Marge d'erreur estimée : ±{mae:.2f}%
-                    </div>
+                    <div style="font-size: 0.76rem; opacity: 0.8;">Marge d'erreur : ±{mae:.2f}%</div>
                 </div>
                 """, unsafe_allow_html=True)
 
@@ -1133,27 +955,22 @@ modele.fit(X_train, y_train, eval_set=[(X_test, y_test)], verbose=False)
                 else:
                     st.info(f"ℹ️ Pas de données ILOSTAT pour {annee} — prédiction future")
 
-                if prediction < 5:
-                    st.success("🟢 Très faible — Marché du travail très dynamique.")
-                elif prediction < 10:
-                    st.info("🟡 Modéré — Dans la moyenne mondiale.")
-                elif prediction < 20:
-                    st.warning("🟠 Élevé — Politiques d'emploi nécessaires.")
-                else:
-                    st.error("🔴 Très élevé — Situation critique.")
+                if prediction < 5:   st.success("🟢 Très faible — Marché du travail très dynamique.")
+                elif prediction < 10: st.info("🟡 Modéré — Dans la moyenne mondiale.")
+                elif prediction < 20: st.warning("🟠 Élevé — Politiques d'emploi nécessaires.")
+                else:                 st.error("🔴 Très élevé — Situation critique.")
 
             else:
                 st.markdown("""
-                <div style="background: linear-gradient(135deg, #1A0533, #0D1B40); border-radius: 12px; padding: 2rem;
-                            text-align: center; border: 2px dashed #E040FB;">
+                <div style="background: linear-gradient(135deg, #1A0533, #0D1B40); border-radius: 12px;
+                            padding: 2rem; text-align: center; border: 2px dashed #E040FB;">
                     <div style="font-size: 2.5rem;">⚡</div>
-                    <div style="color: #00E5FF; font-weight: 600; margin-top: 0.8rem; font-size: 0.95rem;">
-                        Remplissez le formulaire et cliquez<br>sur <strong>Prédire avec XGBoost</strong>
+                    <div style="color: #00E5FF; font-weight: 600; margin-top: 0.8rem;">
+                        Remplissez le formulaire et cliquez sur <strong>Prédire avec XGBoost</strong>
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
 
-        # ── Graphique comparaison historique + futur ──────────────────────────
         st.markdown("---")
         st.markdown('<div class="section-title">📈 Réel (OIT) vs XGBoost — Historique + Futur (2026–2045)</div>', unsafe_allow_html=True)
         st.caption("🔵 Valeurs réelles ILOSTAT  |  🟣 XGBoost années connues  |  🟡 Prédictions futures (cascade)")
@@ -1172,8 +989,7 @@ modele.fit(X_train, y_train, eval_set=[(X_test, y_test)], verbose=False)
 
         with st.spinner("Génération du graphique..."):
             fig_comp = graphique_comparaison_annees(
-                df, modele, feature_cols,
-                le_sex, le_age, le_country,
+                df, modele, feature_cols, le_sex, le_age, le_country,
                 pays_graph, genre_graph, age_graph
             )
 
@@ -1184,10 +1000,10 @@ modele.fit(X_train, y_train, eval_set=[(X_test, y_test)], verbose=False)
 
         st.markdown("---")
         c1, c2, c3, c4 = st.columns(4)
-        c1.metric("Algorithme", "XGBoost")
-        c2.metric("n_estimators", "500 + early stop")
-        c3.metric("MAE", f"{mae:.2f}%")
-        c4.metric("R²", f"{r2:.3f}")
+        c1.metric("Algorithme",    "XGBoost")
+        c2.metric("n_estimators",  "500 + early stop")
+        c3.metric("MAE",           f"{mae:.2f}%")
+        c4.metric("R²",            f"{r2:.3f}")
 
 
 # ==============================================================================
