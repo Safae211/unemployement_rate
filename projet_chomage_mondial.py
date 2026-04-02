@@ -1018,7 +1018,7 @@ modele.fit(X_train, y_train, eval_set=[(X_test, y_test)], verbose=False)
             annee   = st.slider("📅 Année", min_value=1991, max_value=2045, value=2026, step=1)
 
             if annee > 2025:
-                st.warning(f"⚠️ {annee} est une année future — prédiction extrapolée")
+                st.info(f" {annee} est une année future — prédiction extrapolée")
             else:
                 st.info(f"📌 {annee} est une année connue dans ILOSTAT")
 
