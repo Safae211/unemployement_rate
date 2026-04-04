@@ -485,8 +485,8 @@ def graphique_comparaison_annees(df, modele, feature_cols, le_sex, le_age, le_co
         title=f"Réel (OIT) vs XGBoost — {pays} | {genre} | {age_grp}",
         xaxis_title="Année", yaxis_title="Taux de chômage (%)",
         template="plotly_white", hovermode="x unified", height=420,
-        legend=dict(x=0.01, y=0.99, bgcolor="rgba(255,255,255,0.9)",
-                    bordercolor="#D8B4FE", borderwidth=1)
+        legend=dict(orientation="h",x=0.0, y=-0.22,bgcolor="rgba(255,255,255,1.0)", bordercolor="#7B2FBE", borderwidth=2,font=dict(color="#1E1B4B", size=11)
+)
     )
     return fig
 
